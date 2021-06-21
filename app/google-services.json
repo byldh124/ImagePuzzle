@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1092316831941",
+    "project_id": "imagepuzzle01",
+    "storage_bucket": "imagepuzzle01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092316831941:android:dbaeecbe6d35d3f70b50ac",
+        "android_client_info": {
+          "package_name": "com.moondroid.imagepuzzle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092316831941-sg88da92qrva1odpmvpdpkjkrrlrsqbo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB18AqWxmpA1L1m8ZE6NMurks-m4yyu0Es"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092316831941-sg88da92qrva1odpmvpdpkjkrrlrsqbo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
