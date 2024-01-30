@@ -1,16 +1,9 @@
 package com.moondroid.imagepuzzle;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -19,11 +12,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.yalantis.ucrop.UCrop;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
@@ -122,18 +117,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void clickOriginPicture(View view) {
-        OriginPictureDialog dialog = new OriginPictureDialog(this, originBitmap);
-        dialog.setCancelable(false);
-        dialog.show();
-    }
-
     public void clickOtherPicture(View view) {
         setItem();
-    }
-
-    public void clickUpload(View view) {
-        startActivity(new Intent(this, ImagePickerActivity.class));
     }
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.VH> {

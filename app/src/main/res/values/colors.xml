@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="dialog">#66000000</color>
+
     <color name="main">#ff364f6b</color>
     <color name="sub">#4E7AAC</color>
 </resources>

@@ -1,26 +1,11 @@
 package com.moondroid.imagepuzzle;
 
-import androidx.annotation.NonNull;
+import android.app.ProgressDialog;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 
 public class IntroActivity extends AppCompatActivity {
@@ -32,7 +17,7 @@ public class IntroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
+        setContentView(R.layout.activity_splash);
 
         time = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 
@@ -46,23 +31,6 @@ public class IntroActivity extends AppCompatActivity {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
         progressDialog.show();
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("imageUrl").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull @org.jetbrains.annotations.NotNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        String url = (String) documentSnapshot.get("url");
-                        ImageValue.imgUrls.add(url);
-                    }
-                    Collections.shuffle(ImageValue.imgUrls);
-                    progressDialog.dismiss();
-                    startActivity(new Intent(IntroActivity.this, MainActivity.class));
-                    IntroActivity.this.finish();
-                }
-            }
-        });
 
     }
 }
