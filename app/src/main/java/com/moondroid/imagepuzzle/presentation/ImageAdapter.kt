@@ -1,17 +1,21 @@
 package com.moondroid.imagepuzzle.presentation
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.moondroid.imagepuzzle.R
 import com.moondroid.imagepuzzle.common.PuzzleItem
 import com.moondroid.imagepuzzle.databinding.RecyclerItemBinding
 
 class ImageAdapter(val changeImage: (Int) -> Unit) :
     ListAdapter<PuzzleItem, ImageAdapter.ViewHolder>(ImageDiffUtil) {
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun submitList(list: MutableList<PuzzleItem>?) {
         super.submitList(list)
         notifyDataSetChanged()
@@ -31,17 +35,19 @@ class ImageAdapter(val changeImage: (Int) -> Unit) :
             item.bitmap?.let {
                 Glide.with(binding.iv2).load(it).into(binding.iv2)
                 binding.root.setOnClickListener { changeImage(position) }
+            } ?: run {
+                Glide.with(binding.iv2).load(R.drawable.bg_white).into(binding.iv2)
             }
         }
     }
 
     object ImageDiffUtil : DiffUtil.ItemCallback<PuzzleItem>() {
         override fun areItemsTheSame(oldItem: PuzzleItem, newItem: PuzzleItem): Boolean {
-            return false
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: PuzzleItem, newItem: PuzzleItem): Boolean {
-            return false
+            return oldItem.index == newItem.index
         }
     }
 }
