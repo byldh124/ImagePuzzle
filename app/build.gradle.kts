@@ -11,7 +11,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.moondroid.ex_paging"
+        applicationId = "com.moondroid.imagepuzzle"
         minSdk = 24
         targetSdk = 33
         versionCode = 2
