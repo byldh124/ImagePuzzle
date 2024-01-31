@@ -15,7 +15,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white"
-        app:layout_constraintWidth_percent="0.7" />
+        app:layout_constraintWidth_percent="0.8" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ic_close"

@@ -1,4 +1,4 @@
-package com.moondroid.imagepuzzle.presentation
+package com.moondroid.imagepuzzle.presentation.dialog
 
 import android.app.Dialog
 import android.content.Context

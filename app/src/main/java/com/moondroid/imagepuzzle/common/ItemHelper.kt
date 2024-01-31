@@ -9,13 +9,8 @@ import kotlin.random.Random
 object ItemHelper {
     var itemList: List<String> = emptyList()
 
-    fun getUrls(stage: Int) =
-        try {
-            "http://moondroid.dothome.co.kr/wordcomplete/image/${itemList[stage]}.png"
-        } catch (e: Exception) {
-            logException(e)
-            ""
-        }
+    private fun getUrls(stage: Int) =
+        "http://moondroid.dothome.co.kr/imagePuzzle/image/${itemList[stage]}"
 
     fun divide(bitmap: Bitmap, block: Int): Array<Bitmap?> {
         val bitmaps = arrayOfNulls<Bitmap>(9)
@@ -39,8 +34,8 @@ object ItemHelper {
         var bitmap: Bitmap? = null
         try {
             val url = URL(getUrls(stage))
-            val connection = url.openConnection() as HttpURLConnection
             debug("url : $url")
+            val connection = url.openConnection() as HttpURLConnection
             connection.doInput = true
             connection.connect()
             val input = connection.inputStream

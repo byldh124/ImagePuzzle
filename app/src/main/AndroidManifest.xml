@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
-    <uses-permission android:name="CAMERA"/>
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission
+        android:name="android.permission.READ_MEDIA_IMAGES"
+        android:minSdkVersion="33" />
 
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.ImagePuzzle"
-        android:requestLegacyExternalStorage="true">
+        android:usesCleartextTraffic="true">
 
-        <activity android:name=".presentation.SplashActivity"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".presentation.ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,10 +31,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".presentation.MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="false"/>
+        <activity
+            android:name=".presentation.ui.home.MainActivity"
+            android:exported="false" />
 
+        <activity
+            android:name=".presentation.ui.upload.UploadActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".presentation.ui.upload.ImageCropActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

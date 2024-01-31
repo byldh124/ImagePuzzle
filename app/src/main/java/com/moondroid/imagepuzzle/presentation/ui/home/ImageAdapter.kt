@@ -1,7 +1,6 @@
-package com.moondroid.imagepuzzle.presentation
+package com.moondroid.imagepuzzle.presentation.ui.home
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -20,6 +19,8 @@ class ImageAdapter(val changeImage: (Int) -> Unit) :
         super.submitList(list)
         notifyDataSetChanged()
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(RecyclerItemBinding.inflate(LayoutInflater.from(parent.context)))

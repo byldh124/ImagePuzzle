@@ -1,28 +1,27 @@
-package com.moondroid.imagepuzzle.presentation
+package com.moondroid.imagepuzzle.presentation.ui.home
 
-import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.moondroid.imagepuzzle.common.ItemHelper
 import com.moondroid.imagepuzzle.common.PuzzleItem
 import com.moondroid.imagepuzzle.common.debug
+import com.moondroid.imagepuzzle.common.viewBinding
 import com.moondroid.imagepuzzle.databinding.ActivityMainBinding
+import com.moondroid.imagepuzzle.presentation.base.BaseActivity
+import com.moondroid.imagepuzzle.presentation.dialog.OriginImageDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Collections
 
-class MainActivity : AppCompatActivity() {
-    private var _binding: ActivityMainBinding? = null
-    private val binding get() = _binding!!
-    private val mContext: Context by lazy { this }
+class MainActivity : BaseActivity() {
+    private val binding by viewBinding(ActivityMainBinding::inflate)
 
     private var stage = 0
     private lateinit var originBitmap: Bitmap
@@ -33,14 +32,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         binding.recycler2.layoutManager =
             GridLayoutManager(this, 3, RecyclerView.VERTICAL, false)
         binding.recycler2.adapter = adapter
 
         setItem()
+
+        binding.icBack.setOnClickListener { finish() }
 
         binding.btnAnotherImage.setOnClickListener {
             stage++
@@ -122,13 +120,10 @@ class MainActivity : AppCompatActivity() {
         binding.ivAnswer.isVisible = true
         Handler(Looper.getMainLooper()).postDelayed({
             binding.ivAnswer.isVisible = false
+        }, 1000)
+        Handler(Looper.getMainLooper()).postDelayed({
             stage++
             setItem()
         }, 3000)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

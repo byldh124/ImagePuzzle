@@ -3,6 +3,7 @@ package com.moondroid.imagepuzzle.di
 import android.util.Log
 import com.google.gson.GsonBuilder
 import com.moondroid.imagepuzzle.BuildConfig
+import com.moondroid.imagepuzzle.data.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,4 +61,8 @@ object NetworkModule {
             .client(okHttpClient)
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
 }

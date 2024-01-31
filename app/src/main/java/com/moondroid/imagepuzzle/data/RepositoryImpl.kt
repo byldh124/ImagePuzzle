@@ -5,10 +5,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import retrofit2.Retrofit
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
-class RepositoryImpl @Inject constructor(private val retrofit: Retrofit) : Repository {
+class RepositoryImpl @Inject constructor(private val apiService: ApiService) : Repository {
 
     override suspend fun checkAppVersion(
         versionCode: Int,
@@ -16,19 +16,21 @@ class RepositoryImpl @Inject constructor(private val retrofit: Retrofit) : Repos
         packageName: String,
     ): Flow<Int> {
         return flow {
-            retrofit.create(ApiService::class.java)
-                .checkAppVersion(versionCode, versionName, packageName)
-                .run {
-                    emit(code)
-                }
+            val response = apiService.checkAppVersion(versionCode, versionName, packageName)
+            emit(response.code)
         }.flowOn(Dispatchers.IO)
     }
 
     override suspend fun getImageUrls(): Flow<List<String>> {
         return flow {
-            retrofit.create(ApiService::class.java).getImageUrls().run {
-                emit(result)
-            }
+            val response = apiService.getImageUrls()
+            emit(response.result)
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun upload(file: MultipartBody.Part): Flow<SimpleResponse> {
+        return flow {
+            emit(apiService.upload(file))
         }.flowOn(Dispatchers.IO)
     }
 }
