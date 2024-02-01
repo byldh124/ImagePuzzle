@@ -1,14 +1,13 @@
 package com.moondroid.imagepuzzle.presentation.dialog
 
-import android.app.Dialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import com.bumptech.glide.Glide
-import com.moondroid.imagepuzzle.R
 import com.moondroid.imagepuzzle.databinding.DialogOriginPictureBinding
+import com.moondroid.imagepuzzle.presentation.base.BaseDialog
 
-class OriginImageDialog(context: Context, private val bitmap: Bitmap) : Dialog(context, R.style.DialogTheme) {
+class OriginImageDialog(context: Context, private val bitmap: Bitmap) : BaseDialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DialogOriginPictureBinding.inflate(layoutInflater)

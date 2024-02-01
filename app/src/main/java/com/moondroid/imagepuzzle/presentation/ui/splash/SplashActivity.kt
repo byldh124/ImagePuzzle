@@ -2,23 +2,24 @@ package com.moondroid.imagepuzzle.presentation.ui.splash
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.moondroid.imagepuzzle.BuildConfig
 import com.moondroid.imagepuzzle.common.ItemHelper
+import com.moondroid.imagepuzzle.common.exitApp
+import com.moondroid.imagepuzzle.common.logException
 import com.moondroid.imagepuzzle.common.viewBinding
 import com.moondroid.imagepuzzle.databinding.ActivitySplashBinding
 import com.moondroid.imagepuzzle.domain.Repository
 import com.moondroid.imagepuzzle.presentation.base.BaseActivity
+import com.moondroid.imagepuzzle.presentation.dialog.ButtonDialog
 import com.moondroid.imagepuzzle.presentation.ui.home.MainActivity
 import com.moondroid.imagepuzzle.presentation.ui.upload.UploadActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,9 +65,32 @@ class SplashActivity : BaseActivity() {
             ).collect {
                 when (it) {
                     1000 -> getImageUrls()
+                    2003 -> requestVersionUpdate()
                 }
             }
         }
+    }
+
+    /**
+     *  플레이스토어로 이동
+     */
+    private fun requestVersionUpdate() {
+        val builder = ButtonDialog.Builder(mContext).apply {
+            message = "새로운 버전이 출시됐습니다.\\n업데이트 후 이용이 가능합니다."
+            setPositiveButton("업데이트") {
+                try {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = Uri.parse("market://details?id=$packageName")
+                    startActivity(intent)
+                } catch (e: Exception) {
+                    logException(e)
+                    exitApp()
+                }
+            }
+            setNegativeButton("나가기", ::finish)
+            cancelable = false
+        }
+        builder.show()
     }
 
     private fun getImageUrls() {
